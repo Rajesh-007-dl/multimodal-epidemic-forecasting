@@ -5,7 +5,6 @@
 [![XGBoost](https://img.shields.io/badge/XGBoost-3.4+-eb5424.svg)](https://xgboost.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Paper: Research](https://img.shields.io/badge/Status-Research%20Paper-success.svg)](#citation)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](#)
 
 > **Official Repository** for the research paper:  
 > **"Multimodal COVID-19 Forecasting: Integrating Hybrid Statistical, Physics-Informed Neural Networks and Transformer Architectures"**  
