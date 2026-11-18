@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multimodal Epidemic Forecasting — Research Showcase</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Multimodal Epidemic Forecasting: Bridging Statistical Mechanics, PINNs, and Temporal Patch Transformers" />
+  <meta name="description" content="An interactive research showcase presenting a multimodal epidemic forecasting framework integrating hybrid statistical models, physics-informed neural networks (Neural-SEIR-PINN), and temporal transformers (PatchTST)." />
+
+  <!-- Google Fonts: Editorial Serif (Newsreader), Geometric Sans (Plus Jakarta Sans), Monospace (JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#090A0F',
+            slateDark: '#0F111A',
+            cyanGlow: '#38BDF8',
+            indigoGlow: '#818CF8'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Chart.js for Interactive Benchmark Visualizations & Simulator -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- MathJax Configuration for Crisp Academic LaTeX Rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-[#090A0F] text-[#F8FAFC] antialiased selection:bg-cyan-500/25 selection:text-cyan-300 relative">
+
+  <!-- Ambient Floating Aurora Mesh (Adds deep cosmic dimension) -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="ambient-aurora ambient-aurora-cyan w-[620px] h-[620px] -top-40 -left-40"></div>
+    <div class="ambient-aurora ambient-aurora-indigo w-[680px] h-[680px] top-1/3 -right-48"></div>
+    <div class="ambient-aurora ambient-aurora-emerald w-[520px] h-[520px] -bottom-32 left-1/4"></div>
+  </div>
+
+  <!-- ========================================================================
+       1. STICKY GLASSMORPHIC NAVBAR
+       ======================================================================== -->
+  <header id="main-navbar" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#090A0F]/80 border-b border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Paper Tag -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div>
+          <span class="text-sm font-bold tracking-tight font-serif-editorial text-slate-100 group-hover:text-cyan-400 transition-colors">EpidemicForecasting</span>
+          <span class="hidden sm:inline-block text-[11px] font-mono-code text-cyan-400/90 ml-1.5 px-1.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-800/40">IEEE SOTA</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Anchors -->
+      <nav class="hidden lg:flex items-center gap-5 text-xs font-semibold tracking-wide uppercase text-slate-300 font-mono-code">
+        <a href="#abstract" class="hover:text-cyan-400 transition-colors">Abstract</a>
+        <a href="#manuscript-pdf" class="hover:text-cyan-400 transition-colors text-cyan-300 font-bold flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Paper PDF</span>
+        </a>
+        <a href="#metrics" class="hover:text-cyan-400 transition-colors">Key Results</a>
+        <a href="#methodology" class="hover:text-cyan-400 transition-colors">Pipeline</a>
+        <a href="#architecture-gallery" class="hover:text-cyan-400 transition-colors text-cyan-300">Architectures</a>
+        <a href="#benchmarks-table" class="hover:text-cyan-400 transition-colors text-indigo-300">SOTA Table</a>
+        <a href="#visualizations" class="hover:text-cyan-400 transition-colors">Benchmarks</a>
+        <a href="#simulator" class="hover:text-cyan-400 transition-colors">Live Sandbox</a>
+        <a href="#citation" class="hover:text-cyan-400 transition-colors">BibTeX</a>
+      </nav>
+
+      <!-- Action Cluster: Theme Toggle + Read Paper CTA -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Switcher Button -->
+        <button id="theme-toggle-btn" aria-label="Toggle Dark/Light Mode" class="p-2 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-slate-100 border border-slate-700/60 transition-colors">
+          <svg id="theme-icon-dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg id="theme-icon-light" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
+        <!-- Primary CTA: Direct jump to embedded PDF on main page -->
+        <a href="#manuscript-pdf" class="btn-magnetic inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Read Paper (PDF)</span>
+        </a>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Reading Progress Indicator Bar -->
+    <div id="reading-progress"></div>
+  </header>
+
+  <!-- Mobile Dropdown Navigation -->
+  <div id="mobile-menu" class="hidden lg:hidden fixed top-16 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 p-5 space-y-2 font-mono-code text-xs uppercase tracking-wider">
+    <a href="#abstract" class="block mobile-nav-link text-slate-300 hover:text-cyan-400 py-2">Abstract</a>
+    <a href="#manuscript-pdf" class="block mobile-nav-link text-cyan-300 font-bold py-2">Read Paper (PDF)</a>
+    <a href="#metrics" class="block mobile-nav-link text-slate-300 hover:text-cyan-400 py-2">Key Results</a>
+    <a href="#methodology" class="block mobile-nav-link text-slate-300 hover:text-cyan-400 py-2">Pipeline</a>
+    <a href="#architecture-gallery" class="block mobile-nav-link text-cyan-400 py-2">Architecture Diagrams</a>
+    <a href="#benchmarks-table" class="block mobile-nav-link text-indigo-400 py-2">SOTA Comparison Table</a>
+    <a href="#visualizations" class="block mobile-nav-link text-slate-300 hover:text-cyan-400 py-2">Benchmarks</a>
+    <a href="#simulator" class="block mobile-nav-link text-slate-300 hover:text-cyan-400 py-2">Live Sandbox</a>
+    <a href="assets/Multimodal_COVID19_Forecasting.pdf" target="_blank" class="block mobile-nav-link text-emerald-400 font-bold py-2">Download Full PDF</a>
+  </div>
+
+
+  <!-- ========================================================================
+       2. HERO SECTION (ABOVE THE FOLD WITH INTERACTIVE CANVAS)
+       ======================================================================== -->
+  <section class="relative min-h-[94vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    
+    <!-- Interactive Background Canvas (Physics Particle & Wave Mesh) -->
+    <canvas id="hero-canvas" class="absolute inset-0 z-0 pointer-events-auto"></canvas>
+
+    <!-- Subtle Ambient Radial Glows -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-cyan-500/15 via-indigo-500/15 to-transparent blur-[140px] pointer-events-none z-0"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <!-- Publication Acceptance Badge with Glowing Animation -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-code font-semibold bg-slate-900/90 border border-cyan-500/30 shadow-[0_0_20px_rgba(56,189,248,0.2)] mb-6 backdrop-blur-xl">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-slate-200">Peer-Reviewed Research Preprint</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-cyan-400 font-bold">IEEE SOTA Benchmarks 2026</span>
+      </div>
+
+      <!-- Main Headline: Editorial Serif Typography with Shimmer Text -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif-editorial font-bold tracking-tight text-slate-100 max-w-4xl mx-auto leading-[1.12]">
+        Multimodal Epidemic Forecasting:
+        <span class="block mt-2 font-normal italic shimmer-text">
+          Bridging Statistical Mechanics, Neural PINNs, and Patch Transformers
+        </span>
+      </h1>
+
+      <!-- Editorial Summary Pull-Quote -->
+      <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-sans leading-relaxed">
+        A unified computational framework synchronizing 1,143 consecutive days of global infection records with Google mobility streams and Oxford government stringency indices to eliminate multi-step autoregressive drift.
+      </p>
+
+      <!-- Author Attribution with Affiliation Tooltips -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs sm:text-sm font-medium text-slate-400">
+        <span class="group relative cursor-help border-b border-dashed border-slate-600 hover:text-cyan-300 transition-colors">
+          Epidemiological Intelligence Lab
+          <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-52 p-2.5 rounded-xl bg-slate-900/95 border border-slate-700 text-[11px] text-slate-300 text-center shadow-2xl backdrop-blur-md z-30">
+            Department of Computational Medicine &amp; Time-Series Systems
+          </span>
+        </span>
+        <span>•</span>
+        <span class="group relative cursor-help border-b border-dashed border-slate-600 hover:text-indigo-300 transition-colors">
+          Deep Learning Systems Group
+          <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-52 p-2.5 rounded-xl bg-slate-900/95 border border-slate-700 text-[11px] text-slate-300 text-center shadow-2xl backdrop-blur-md z-30">
+            Physics-Informed Neural Networks &amp; Foundation Transformers
+          </span>
+        </span>
+        <span>•</span>
+        <span class="text-slate-400 font-mono-code">Published Nov 2026</span>
+      </div>
+
+      <!-- Action Buttons Bar with Main-Page PDF Integration -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <!-- Read Paper on Main Page -->
+        <a href="#manuscript-pdf" class="btn-magnetic inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <span>Read Paper on Page (PDF)</span>
+        </a>
+
+        <!-- Direct PDF Download Link -->
+        <a href="assets/Multimodal_COVID19_Forecasting.pdf" download="Multimodal_COVID19_Forecasting.pdf" class="btn-magnetic inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 shadow-lg hover:border-cyan-400 transition-all">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Download PDF (990 KB)</span>
+        </a>
+
+        <!-- Jump to SOTA Benchmark Table -->
+        <a href="#benchmarks-table" class="btn-magnetic inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-slate-900/60 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-indigo-400/60 transition-all">
+          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          <span>SOTA Benchmark Table</span>
+        </a>
+      </div>
+
+      <!-- Quick Trust Indicators in Spotlight Glass-Pills -->
+      <div class="mt-14 pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left max-w-4xl mx-auto">
+        <div class="spotlight-card p-4 rounded-xl border border-slate-800/80 bg-slate-900/40">
+          <div class="flex items-center gap-1.5 text-[11px] font-mono-code uppercase text-slate-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Peak Recovery Fit</span>
+          </div>
+          <div class="text-xl font-bold font-mono-code text-cyan-400 mt-1" data-counter-target="0.976" data-counter-prefix="R² = ">R² = 0.000</div>
+        </div>
+        <div class="spotlight-card p-4 rounded-xl border border-slate-800/80 bg-slate-900/40">
+          <div class="flex items-center gap-1.5 text-[11px] font-mono-code uppercase text-slate-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+            <span>Mortality Tracking</span>
+          </div>
+          <div class="text-xl font-bold font-mono-code text-indigo-400 mt-1" data-counter-target="0.972" data-counter-prefix="R² = ">R² = 0.000</div>
+        </div>
+        <div class="spotlight-card p-4 rounded-xl border border-slate-800/80 bg-slate-900/40">
+          <div class="flex items-center gap-1.5 text-[11px] font-mono-code uppercase text-slate-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Rollout Horizon</span>
+          </div>
+          <div class="text-xl font-bold font-mono-code text-emerald-400 mt-1">15 Days Ahead</div>
+        </div>
+        <div class="spotlight-card p-4 rounded-xl border border-slate-800/80 bg-slate-900/40">
+          <div class="flex items-center gap-1.5 text-[11px] font-mono-code uppercase text-slate-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+            <span>Significance</span>
+          </div>
+          <div class="text-xl font-bold font-mono-code text-rose-400 mt-1">p &lt; 0.001</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       3. ABSTRACT & CORE MOTIVATION
+       ======================================================================== -->
+  <section id="abstract" class="py-20 relative border-t border-slate-800/80 bg-slate-950/40">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
+      <!-- Abstract Glass Card with Spotlight Hover -->
+      <div class="spotlight-card rounded-2xl p-8 sm:p-10 border border-slate-800/80 shadow-2xl relative overflow-hidden reveal-on-scroll">
+        <div class="absolute -top-12 -right-12 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex items-center gap-2 mb-4">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span class="text-xs uppercase tracking-widest font-mono-code text-cyan-400 font-semibold">Executive Abstract</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-serif-editorial font-bold text-slate-100 leading-snug">
+          Synthesizing Multi-Horizon Predictability with Biological Feasibility
+        </h2>
+
+        <div class="mt-6 text-sm sm:text-base text-slate-300 leading-relaxed space-y-4 font-sans">
+          <p>
+            During catastrophic global health crises, predictive forecasting models face extreme volatility, non-stationarity, and reporting artifacts. Traditional autoregressive statistical models (e.g., ARIMA, Holt-Winters) excel at linear short-term trends but cascade explosive errors over multi-step horizons, while pure black-box deep learning architectures frequently violate fundamental epidemiological conservation constraints.
+          </p>
+          <p>
+            This paper introduces a tri-modal, multi-paradigm forecasting methodology synthesizing <strong>1,143 consecutive days</strong> of global daily epidemiological data from Johns Hopkins CSSE with six Google mobility indicators and the Oxford Blavatnik Government Stringency Index. We rigorously replicate benchmark studies across a 66-to-76 day horizon using <em>Hybrid Auto-ARIMA with Lag-7 XGBoost Residual Correction</em>, <em>Holt-Winters with 100-Tree Bagged Random Forest</em>, <em>Neural-SEIR-PINN</em>, and <em>Channel-Independent PatchTST Transformers</em>.
+          </p>
+          <p>
+            Our results establish that Physics-Informed Neural Networks discover biologically plausible transmission parameters while confining cumulative death projections to tight error bounds (<em>R</em>² = 0.972, RMSE = 814), whereas temporal patch transformers capture plateau saturation (<em>R</em>² = 0.976), suppressing multi-step error accumulation by <strong>94.8%</strong> over unconstrained baseline architectures.
+          </p>
+        </div>
+
+        <!-- Jump to PDF CTA inside Abstract -->
+        <div class="mt-6 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-2 text-xs font-mono-code text-slate-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Full paper embedded below with instant access</span>
+          </div>
+          <a href="#manuscript-pdf" class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+            <span>Jump directly to Paper Viewer</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       3B. DIRECT EMBEDDED RESEARCH MANUSCRIPT (PDF VIEWER IN MAIN PAGE)
+       ======================================================================== -->
+  <section id="manuscript-pdf" class="py-20 relative border-t border-slate-800 bg-[#090A0F]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Title Header -->
+      <div class="text-center max-w-3xl mx-auto mb-10 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-cyan-400 font-bold">Original Publication Document</span>
+        <h2 class="text-3xl sm:text-5xl font-serif-editorial font-bold text-slate-100 mt-2">
+          Research Manuscript (PDF)
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Read the complete 18-page peer-reviewed research preprint directly on this page, or open in full-screen mode with native page controls.
+        </p>
+      </div>
+
+      <!-- High-End Desktop / Laptop PDF Reader Frame -->
+      <div class="spotlight-card rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-950 flex flex-col reveal-on-scroll">
+        
+        <!-- Viewer Window Toolbar -->
+        <div class="flex flex-wrap items-center justify-between px-5 py-3.5 border-b border-slate-800 bg-slate-900/90 gap-3">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            </div>
+            <div class="h-4 w-px bg-slate-700 hidden sm:block"></div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-cyan-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span class="text-xs font-mono-code text-slate-200 font-bold truncate max-w-xs sm:max-w-md">
+                Multimodal_COVID19_Forecasting.pdf
+              </span>
+              <span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800/60 hidden sm:inline-block">
+                18 Pages • 990 KB
+              </span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-2">
+            <!-- Fullscreen Lightbox Modal Trigger -->
+            <button onclick="openPdfModal()" class="btn-magnetic inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 hover:border-cyan-400 transition-all">
+              <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+              <span>Full Screen</span>
+            </button>
+
+            <!-- Open in Dedicated Tab -->
+            <a href="assets/Multimodal_COVID19_Forecasting.pdf" target="_blank" class="btn-magnetic inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              <span class="hidden sm:inline">New Tab</span>
+            </a>
+
+            <!-- Download PDF Button -->
+            <a href="assets/Multimodal_COVID19_Forecasting.pdf" download="Multimodal_COVID19_Forecasting.pdf" class="btn-magnetic inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-md hover:scale-105 transition-all">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded Interactive PDF Viewport on Main Page -->
+        <div class="w-full h-[760px] sm:h-[860px] lg:h-[940px] bg-slate-950 relative">
+          <iframe src="assets/Multimodal_COVID19_Forecasting.pdf#view=FitH&toolbar=1" 
+                  class="w-full h-full border-none shadow-inner" 
+                  title="Multimodal COVID-19 Forecasting Research Manuscript (PDF)">
+          </iframe>
+        </div>
+
+        <!-- Embedded Viewer Footer -->
+        <div class="px-5 py-3 border-t border-slate-800/80 bg-slate-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono-code text-slate-400 gap-2">
+          <span class="text-slate-300">
+            <strong>Manuscript Title:</strong> Multimodal COVID-19 Forecasting Integrating Hybrid Statistical, PINNs and Transformer Architectures
+          </span>
+          <span class="text-cyan-400">18 Pages • Complete Full-Length Paper</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       4. TL;DR & KEY METRICS BENTO GRID
+       ======================================================================== -->
+  <section id="metrics" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-cyan-400 font-bold">Empirical Highlights</span>
+        <h2 class="text-3xl sm:text-5xl font-serif-editorial font-bold text-slate-100 mt-2">
+          Key Breakthroughs at a Glance
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Statistical superiority across long-horizon plateaus, dynamic parameter discovery, and unphysical drift suppression.
+        </p>
+      </div>
+
+      <!-- Asymmetric Bento Grid with Spotlight and 3D Tilt -->
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <!-- Bento 1: Standout R² Metric (Span 2) -->
+        <div class="bento-card spotlight-card tilt-card p-6 md:col-span-2 lg:col-span-2 flex flex-col justify-between reveal-on-scroll delay-100">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono-code bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-3">
+              Out-of-Sample Holdout Fit
+            </div>
+            <div class="text-5xl sm:text-6xl font-bold font-mono-code text-cyan-400 tracking-tight" 
+                 data-counter-target="0.976" data-counter-prefix="R² = ">
+              R² = 0.000
+            </div>
+            <h3 class="text-lg font-bold font-serif-editorial text-slate-100 mt-3">PatchTST Recovery Plateau Capture</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed">
+              PatchTST subseries patching accurately predicted the 131.2M recovery plateau after global reporting discontinued in August 2021, whereas unregularized baselines drifted upwards exponentially.
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono-code text-slate-400">
+            <span>Replication Horizon: 66–76 Days</span>
+            <span class="text-cyan-400">SOTA vs 8 Baselines</span>
+          </div>
+        </div>
+
+        <!-- Bento 2: The Problem -->
+        <div class="bento-card spotlight-card tilt-card p-6 md:col-span-1 lg:col-span-2 flex flex-col justify-between reveal-on-scroll delay-200">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono-code bg-rose-500/10 text-rose-400 border border-rose-500/20 mb-3">
+              The Scientific Bottleneck
+            </div>
+            <h3 class="text-xl font-bold font-serif-editorial text-slate-100">Why Classical Models Diverge</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+              Pure statistical approaches (ARIMA, Holt-Winters) carry explosive compounding errors when rolled out recursively. Pure deep neural nets, while expressive, hallucinate unphysical negative counts or runaway infections because they lack conservation physics.
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-800/80 text-xs font-mono-code text-rose-300">
+            Error Cascades &gt; 350% on &gt; 30-Day Rollouts
+          </div>
+        </div>
+
+        <!-- Bento 3: Dynamic PINN Parameter Discovery -->
+        <div class="bento-card spotlight-card tilt-card p-6 md:col-span-1 lg:col-span-1 flex flex-col justify-between reveal-on-scroll delay-100">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono-code bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-3">
+              PINN Physics
+            </div>
+            <div class="text-3xl sm:text-4xl font-bold font-mono-code text-indigo-400">
+              γ = 0.2959
+            </div>
+            <h4 class="text-sm font-bold font-serif-editorial text-slate-200 mt-2">Discovered Recovery Rate</h4>
+            <p class="text-xs text-slate-400 mt-1">
+              Neural network learns biological transmission constants obeying SEIR ODE invariants: <em>dS/dt + dE/dt + dI/dt + dR/dt = 0</em>.
+            </p>
+          </div>
+          <div class="mt-4 text-[11px] font-mono-code text-indigo-300">
+            Mean Infectious Period: 3.38 Days
+          </div>
+        </div>
+
+        <!-- Bento 4: Multimodal Covariates Ingestion -->
+        <div class="bento-card spotlight-card tilt-card p-6 md:col-span-1 lg:col-span-2 flex flex-col justify-between reveal-on-scroll delay-200">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono-code bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
+              Multimodal Ingestion
+            </div>
+            <div class="text-3xl sm:text-4xl font-bold font-mono-code text-emerald-400"
+                 data-counter-target="1143" data-counter-suffix=" Days">
+              0 Days
+            </div>
+            <h4 class="text-sm font-bold font-serif-editorial text-slate-200 mt-2">JHU CSSE + Google Mobility + Oxford OxCGRT</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Synthesizing 10 parallel spatio-temporal channels including retail, transit, residential mobility, and policy stringency across 3 calendar years (Jan 22, 2020 – Mar 9, 2023).
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono-code text-slate-400">
+            <span>Temporal Channels: 10</span>
+            <span class="text-emerald-400">Zero Data Leakage Split</span>
+          </div>
+        </div>
+
+        <!-- Bento 5: Error Reduction Impact -->
+        <div class="bento-card spotlight-card tilt-card p-6 md:col-span-1 lg:col-span-1 flex flex-col justify-between reveal-on-scroll delay-300">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono-code bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-3">
+              Benchmark Impact
+            </div>
+            <div class="text-3xl sm:text-4xl font-bold font-mono-code text-cyan-400"
+                 data-counter-target="94.8" data-counter-prefix="-" data-counter-suffix="%">
+              -0.0%
+            </div>
+            <h4 class="text-sm font-bold font-serif-editorial text-slate-200 mt-2">Cumulative Multi-Step Error Drop</h4>
+            <p class="text-xs text-slate-400 mt-1">
+              Residual ML correction and channel-independent patch attention eliminate compounding divergence.
+            </p>
+          </div>
+          <div class="mt-4 text-[11px] font-mono-code text-cyan-300">
+            Confirmed: RMSE 16.8k → 885
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       5. INTERACTIVE ARCHITECTURE & METHODOLOGY PIPELINE
+       ======================================================================== -->
+  <section id="methodology" class="py-24 relative bg-slate-950/70 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-cyan-400 font-bold">Systems Architecture</span>
+        <h2 class="text-3xl sm:text-5xl font-serif-editorial font-bold text-slate-100 mt-2">
+          Interactive Research Pipeline
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Click any phase in the methodology pipeline to inspect mathematical formulations and preview the high-resolution publication diagrams.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Interactive Pipeline Node Selector (5 Cols) -->
+        <div class="lg:col-span-5 space-y-3 reveal-on-scroll delay-100">
+          
+          <button data-stage="phase1" class="pipeline-node w-full text-left p-4 rounded-xl border border-cyan-400 bg-cyan-500/10 glow-cyan transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="node-dot w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_12px_#38bdf8]"></span>
+              <div>
+                <span class="block text-xs font-mono-code uppercase text-cyan-300 font-bold">Phase I</span>
+                <span class="text-sm font-semibold text-slate-100 group-hover:text-cyan-300 transition-colors">Multimodal Data Ingestion</span>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <button data-stage="phase2" class="pipeline-node w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/60 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="node-dot w-3 h-3 rounded-full bg-slate-600"></span>
+              <div>
+                <span class="block text-xs font-mono-code uppercase text-slate-400 font-bold">Phase II</span>
+                <span class="text-sm font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors">Chronological Partitioning</span>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <button data-stage="phase3" class="pipeline-node w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/60 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="node-dot w-3 h-3 rounded-full bg-slate-600"></span>
+              <div>
+                <span class="block text-xs font-mono-code uppercase text-slate-400 font-bold">Phase III</span>
+                <span class="text-sm font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors">Multi-Paradigm Modeling Zoo</span>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <button data-stage="phase4" class="pipeline-node w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/60 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="node-dot w-3 h-3 rounded-full bg-slate-600"></span>
+              <div>
+                <span class="block text-xs font-mono-code uppercase text-slate-400 font-bold">Phase IV</span>
+                <span class="text-sm font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors">Out-of-Sample Forecasting</span>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <button data-stage="phase5" class="pipeline-node w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/60 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="node-dot w-3 h-3 rounded-full bg-slate-600"></span>
+              <div>
+                <span class="block text-xs font-mono-code uppercase text-slate-400 font-bold">Phase V</span>
+                <span class="text-sm font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors">Validation &amp; Uncertainty Engine</span>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <!-- Master Diagram Lightbox Action Card -->
+          <div class="p-4 rounded-xl border border-indigo-500/30 bg-indigo-950/20 mt-4 spotlight-card">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold font-mono-code text-indigo-400 uppercase">Master Framework</span>
+                <p class="text-xs text-slate-300 mt-0.5">FIGURE 1: Full 300-DPI System Workflow</p>
+              </div>
+              <button onclick="openDiagramModal('assets/images/paper_fig1_system_framework.png', 'FIGURE 1: Multimodal Epidemic Forecasting Framework Architecture')"
+                      class="btn-magnetic px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition-colors shadow-lg shadow-indigo-600/30">
+                Inspect
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Dynamic Stage Explanation & Interactive Preview Card (7 Cols) -->
+        <div class="lg:col-span-7 reveal-on-scroll delay-200">
+          <div class="spotlight-card rounded-2xl p-6 sm:p-8" id="pipeline-detail-content">
+            <!-- Populated dynamically via pipeline-interactive.js -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       5B. PUBLICATION ARCHITECTURE DIAGRAM SHOWCASE
+       ======================================================================== -->
+  <section id="architecture-gallery" class="py-24 relative border-t border-slate-800 bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-cyan-400 font-bold">Scientific Schematics</span>
+        <h2 class="text-3xl sm:text-5xl font-serif-editorial font-bold text-slate-100 mt-2">
+          Publication Architecture Diagrams
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Explore the exact 300-DPI publication schematics detailing each mathematical stage, neural encoder, and hybrid residual pipeline.
+        </p>
+
+        <!-- Diagram Selection Tabs -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-slate-900 border border-slate-800">
+          <button data-fig="fig1" class="gallery-tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold font-mono-code transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 shadow-[0_0_12px_rgba(56,189,248,0.25)]">
+            Fig 1: Master Framework
+          </button>
+          <button data-fig="fig2" class="gallery-tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all">
+            Fig 2: ARIMA-XGBoost
+          </button>
+          <button data-fig="fig3" class="gallery-tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all">
+            Fig 3: Holt-Winters-RF
+          </button>
+          <button data-fig="fig4" class="gallery-tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all">
+            Fig 4: Neural-SEIR-PINN
+          </button>
+          <button data-fig="fig5" class="gallery-tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all">
+            Fig 5: PatchTST Transformer
+          </button>
+          <button data-fig="fig12" class="gallery-tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all">
+            Fig 12: Recovery Plateau
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Diagram Display Card -->
+      <div class="spotlight-card rounded-2xl p-6 sm:p-8 reveal-on-scroll">
+        
+        <!-- Viewer Header Controls -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-slate-800/80">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono-code bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-1">
+              300 DPI Publication Vector
+            </span>
+            <h3 id="gallery-fig-title" class="text-xl sm:text-2xl font-serif-editorial font-bold text-slate-100">
+              FIGURE 1: Multimodal Epidemic Forecasting Framework Architecture
+            </h3>
+            <p id="gallery-fig-tagline" class="text-xs font-mono-code text-slate-400 mt-0.5">
+              End-to-End System Pipeline Synchronizing 1,143 Days Across 10 Spatio-Temporal Channels
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 self-end sm:self-center">
+            <!-- Zoom Controls -->
+            <div class="flex items-center bg-slate-900 border border-slate-700/80 rounded-lg p-1 text-xs font-mono-code">
+              <button id="gallery-zoom-out" title="Zoom Out (-)" class="px-2 py-1 hover:text-cyan-400 text-slate-400 transition-colors">−</button>
+              <span id="gallery-zoom-val" class="px-2 text-slate-200">100%</span>
+              <button id="gallery-zoom-in" title="Zoom In (+)" class="px-2 py-1 hover:text-cyan-400 text-slate-400 transition-colors">+</button>
+              <button id="gallery-zoom-reset" title="Reset Zoom" class="px-2 py-1 border-l border-slate-700 text-slate-400 hover:text-white transition-colors">Reset</button>
+            </div>
+
+            <!-- Inspect in Lightbox -->
+            <button id="gallery-inspect-btn" class="btn-magnetic inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 hover:border-cyan-400 transition-all">
+              <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+              <span>Full Screen</span>
+            </button>
+
+            <!-- Download -->
+            <a id="gallery-download-btn" href="assets/images/paper_fig1_system_framework.png" download class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors" title="Download High-Res PNG">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- High-Contrast Diagram Canvas Container (Large Height & Crisp Presentation) -->
+        <div class="relative w-full min-h-[460px] sm:min-h-[560px] rounded-xl overflow-hidden bg-white border border-slate-700/80 shadow-2xl flex items-center justify-center p-4 sm:p-6 group">
+          <img id="gallery-display-img" 
+               src="assets/images/paper_fig1_system_framework.png" 
+               alt="FIGURE 1: Multimodal Epidemic Forecasting Framework Architecture" 
+               class="max-w-full max-h-[580px] object-contain transition-transform duration-200 select-none" />
+        </div>
+
+        <!-- Diagram Caption and Detailed Architectural Breakdown -->
+        <div class="mt-8 pt-6 border-t border-slate-800/80">
+          <p id="gallery-fig-caption" class="text-sm font-bold font-serif-editorial text-slate-200 mb-1">
+            FIGURE 1: Multimodal Epidemic Forecasting Framework Architecture
+          </p>
+          <p id="gallery-fig-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-4xl">
+            Illustrates the 5-phase dataflow from daily multimodal ingestion (JHU CSSE, Google Mobility, Oxford Blavatnik OxCGRT), through chronological non-leaking partitioning, 4-paradigm multi-model zoo execution, multi-horizon out-of-sample projection, and parametric Student's t uncertainty quantification.
+          </p>
+
+          <div id="gallery-modules-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5">
+            <!-- Populated dynamically via gallery-table.js -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       5C. SOTA LITERATURE BENCHMARK COMPARISON TABLE (REFINED EDITORIAL DESIGN)
+       ======================================================================== -->
+  <section id="benchmarks-table" class="py-24 relative border-t border-slate-800 bg-[#090A0F]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-10 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-indigo-400 font-bold">Empirical Holdout Evaluation</span>
+        <h2 class="text-3xl sm:text-5xl font-serif-editorial font-bold text-slate-100 mt-2">
+          State-of-the-Art Benchmark Comparison
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          TABLE I: Systematic empirical benchmark comparing our 4 proposed paradigms against 8 peer-reviewed literature studies across error metrics, rollout horizons, and uncertainty intervals.
+        </p>
+      </div>
+
+      <!-- Unified Segmented Control & Live Search Toolbar -->
+      <div class="mb-6 p-2 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md shadow-2xl flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 reveal-on-scroll">
+        
+        <!-- Left: Category Filter Segmented Control -->
+        <div class="flex items-center gap-1 p-1 rounded-xl bg-slate-950 border border-slate-800/80 flex-wrap sm:flex-nowrap">
+          <button data-filter="all" class="table-filter-btn px-4 py-2 rounded-lg text-xs font-semibold font-mono-code transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 shadow-[0_0_12px_rgba(56,189,248,0.25)] flex items-center gap-1.5">
+            <span>All 12 Studies</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-cyan-400/20 text-[10px]">12</span>
+          </button>
+          <button data-filter="proposed" class="table-filter-btn px-4 py-2 rounded-lg text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Our 4 Models (SOTA)</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-[10px]">4</span>
+          </button>
+          <button data-filter="baselines" class="table-filter-btn px-4 py-2 rounded-lg text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all flex items-center gap-1.5">
+            <span>Literature Baselines</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-[10px]">8</span>
+          </button>
+        </div>
+
+        <!-- Middle: Instant Live Search Bar -->
+        <div class="relative flex-1 max-w-md mx-auto lg:mx-0 w-full">
+          <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input id="table-search-input" 
+                 type="text" 
+                 placeholder="Search models, authors, metrics (e.g. PINN, PatchTST, Rustam)..." 
+                 class="w-full bg-slate-950 border border-slate-800 text-xs text-slate-200 placeholder-slate-500 rounded-xl pl-9 pr-4 py-2 focus:outline-none focus:border-cyan-400/80 transition-colors font-mono-code" />
+        </div>
+
+        <!-- Right: View Mode Toggle -->
+        <div class="flex items-center gap-1 p-1 rounded-xl bg-slate-950 border border-slate-800/80 self-center sm:self-auto">
+          <button id="btn-view-interactive" class="px-3.5 py-2 rounded-lg text-xs font-semibold font-mono-code transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 shadow-[0_0_12px_rgba(56,189,248,0.25)] flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span>Interactive Table</span>
+          </button>
+          <button id="btn-view-plate" class="px-3.5 py-2 rounded-lg text-xs font-semibold font-mono-code text-slate-400 hover:text-slate-200 border border-transparent transition-all flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span>300-DPI Original Plate</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 1. Interactive Responsive Semantic HTML/CSS Table View -->
+      <div id="table-interactive-view" class="spotlight-card rounded-2xl overflow-hidden shadow-2xl border border-slate-800 reveal-on-scroll">
+        <div class="overflow-x-auto max-h-[720px] overflow-y-auto">
+          <table class="w-full text-left border-collapse">
+            <thead class="sticky top-0 z-20">
+              <tr class="bg-slate-900/95 backdrop-blur-md border-b border-slate-700 text-[11px] font-mono-code uppercase tracking-wider text-slate-300">
+                <th class="p-4 font-bold w-52">Study / Reference</th>
+                <th class="p-4 font-bold min-w-[200px]">Evaluated Architecture</th>
+                <th class="p-4 font-bold w-44">Target Scope &amp; Horizon</th>
+                <th class="p-4 font-bold w-40">Goodness-of-Fit (R²)</th>
+                <th class="p-4 font-bold min-w-[220px]">Errors (MAE / RMSE)</th>
+                <th class="p-4 font-bold w-36">Relative Error</th>
+                <th class="p-4 font-bold min-w-[210px]">Prediction Uncertainty</th>
+              </tr>
+            </thead>
+            <tbody id="benchmark-table-body" class="divide-y divide-slate-800/60">
+              <!-- Rendered dynamically by gallery-table.js with rich badges & cards -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Table Footnote -->
+        <div class="p-4 bg-slate-950/90 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono-code text-slate-400 gap-2">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span>Our 4 Evaluated Models</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-600"></span>Literature Benchmarks</span>
+          </div>
+          <span class="text-cyan-400 font-bold">p &lt; 0.001 Empirical Statistical Significance</span>
+        </div>
+      </div>
+
+      <!-- 2. High-Res 300-DPI Table Image Plate View (Toggleable with Elegant Dark Matting) -->
+      <div id="table-image-view" class="hidden spotlight-card rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+          <div>
+            <h4 class="text-lg font-bold font-serif-editorial text-slate-100">
+              TABLE I: Statistical Performance Comparison with Related Benchmark Studies
+            </h4>
+            <span class="text-xs font-mono-code text-cyan-400">Publication Grade (300 DPI Original Grayscale Plate)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openDiagramModal('assets/images/paper_table_comparison_sota.png', 'TABLE I: Statistical Performance Comparison with Related Benchmark Studies')" 
+                    class="btn-magnetic px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 transition-colors">
+              Inspect in Lightbox
+            </button>
+            <a href="assets/images/paper_table_comparison_sota.png" download class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors" title="Download High-Res PNG">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Plate Frame with Elegant Dark Framing Matting (Eliminates blinding solid white box) -->
+        <div class="plate-frame-dark rounded-xl overflow-hidden p-3 sm:p-6 shadow-2xl flex flex-col items-center justify-center relative group">
+          <div class="bg-white/95 rounded-lg p-2 sm:p-4 shadow-xl max-w-full overflow-hidden transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(56,189,248,0.25)] border border-slate-400/40">
+            <img src="assets/images/paper_table_comparison_sota.png" 
+                 alt="TABLE I: Statistical Performance Comparison with Related Benchmark Studies" 
+                 class="max-w-full h-auto object-contain cursor-zoom-in transition-transform duration-300 group-hover:scale-[1.01]"
+                 onclick="openDiagramModal('assets/images/paper_table_comparison_sota.png', 'TABLE I: Statistical Performance Comparison with Related Benchmark Studies')" />
+          </div>
+          <div class="mt-4 flex items-center gap-2 text-xs font-mono-code text-slate-400">
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+            <span>Click table plate to inspect in interactive zoomable lightbox</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       6. DATA VISUALIZATIONS & RESULTS COMPARISON
+       ======================================================================== -->
+  <section id="visualizations" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-indigo-400 font-bold">Experimental Results</span>
+        <h2 class="text-3xl sm:text-5xl font-serif-editorial font-bold text-slate-100 mt-2">
+          Model Benchmark Visualizations
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Interactive evaluation comparing our proposed architectures against classical and literature benchmarks across cumulative recoveries, deaths, and infection cases.
+        </p>
+
+        <!-- Metric Switcher Tabs -->
+        <div class="mt-8 inline-flex p-1 rounded-xl bg-slate-900 border border-slate-800 flex-wrap justify-center gap-1">
+          <button data-chart="recoveries" class="chart-tab-btn px-4 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 shadow-[0_0_12px_rgba(56,189,248,0.25)]">
+            Recoveries Plateau (Fig 12)
+          </button>
+          <button data-chart="deaths" class="chart-tab-btn px-4 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all text-slate-400 hover:text-slate-200 border border-transparent">
+            Cumulative Mortality (R² = 0.972)
+          </button>
+          <button data-chart="confirmed" class="chart-tab-btn px-4 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all text-slate-400 hover:text-slate-200 border border-transparent">
+            Confirmed Infections
+          </button>
+          <button data-chart="ablation" class="chart-tab-btn px-4 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all text-slate-400 hover:text-slate-200 border border-transparent">
+            Ablation &amp; Residuals
+          </button>
+        </div>
+      </div>
+
+      <!-- Chart Display Viewport -->
+      <div class="spotlight-card rounded-2xl p-6 sm:p-8 reveal-on-scroll">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 mb-4 border-b border-slate-800">
+          <div>
+            <span id="chart-badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono-code bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-1">
+              Plateau Saturation
+            </span>
+            <h3 id="chart-title" class="text-xl font-bold font-serif-editorial text-slate-100">
+              Recoveries Forecast: Empirical Ground Truth vs Model Predictions
+            </h3>
+          </div>
+          <div class="flex items-center gap-4 text-xs font-mono-code text-slate-400">
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-1 bg-cyan-400 rounded-full"></span>Proposed (PatchTST / PINN)</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-1 bg-slate-500 rounded-full"></span>Ground Truth</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-1 bg-rose-500/80 rounded-full border border-dashed border-rose-400"></span>Unregularized Baselines</span>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="relative w-full h-[420px] sm:h-[480px]">
+          <canvas id="benchmark-chart"></canvas>
+        </div>
+
+        <!-- Dynamic Chart Narrative Footnote -->
+        <div id="chart-caption" class="mt-6 pt-4 border-t border-slate-800/80 text-xs sm:text-sm text-slate-400 leading-relaxed font-sans">
+          Demonstrates how the PatchTST subseries patching and Neural-SEIR-PINN capture the 131.2M empirical plateau following reporting cessation, while unregularized baseline ML models drift upward with cumulative error.
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       7. INTERACTIVE SANDBOX / LIVE SEIR CONCEPT EXPLORER
+       ======================================================================== -->
+  <section id="simulator" class="py-24 relative bg-slate-950/70 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-cyan-400 font-bold">Interactive Sandbox</span>
+        <h2 class="text-3xl sm:text-5xl font-serif-editorial font-bold text-slate-100 mt-2">
+          Live Epidemiological PINN Simulator
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Adjust the discovered biological parameters in real time to simulate disease transmission curves according to the Neural-SEIR-PINN ordinary differential equations.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Controls Column (5 Cols) -->
+        <div class="lg:col-span-5 spotlight-card rounded-2xl p-6 sm:p-8 space-y-6 reveal-on-scroll delay-100">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <span class="text-xs uppercase font-mono-code text-cyan-400 font-bold">Parameter Sliders</span>
+            <button id="sim-reset-btn" class="btn-magnetic text-xs font-mono-code text-slate-400 hover:text-white transition-colors">Reset Defaults</button>
+          </div>
+
+          <!-- Beta Transmission Rate Slider -->
+          <div>
+            <div class="flex justify-between text-xs font-mono-code mb-2">
+              <span class="text-slate-300">Transmission Rate (β):</span>
+              <span id="val-beta" class="text-cyan-400 font-bold">0.450</span>
+            </div>
+            <input id="slider-beta" type="range" min="0.10" max="0.90" step="0.01" value="0.45" />
+            <div class="flex justify-between text-[10px] font-mono-code text-slate-500 mt-1">
+              <span>0.10 (Strict Lockdown)</span>
+              <span>0.90 (Uncontained)</span>
+            </div>
+          </div>
+
+          <!-- Gamma Recovery Rate Slider -->
+          <div>
+            <div class="flex justify-between text-xs font-mono-code mb-2">
+              <span class="text-slate-300">Recovery Rate (γ):</span>
+              <span id="val-gamma" class="text-indigo-400 font-bold">0.296</span>
+            </div>
+            <input id="slider-gamma" type="range" min="0.05" max="0.60" step="0.005" value="0.296" />
+            <div class="flex justify-between text-[10px] font-mono-code text-slate-500 mt-1">
+              <span>0.05 (Slow Clearance)</span>
+              <span>0.60 (Rapid Immunity)</span>
+            </div>
+          </div>
+
+          <!-- Sigma Incubation Rate Slider -->
+          <div>
+            <div class="flex justify-between text-xs font-mono-code mb-2">
+              <span class="text-slate-300">Incubation Rate (σ):</span>
+              <span id="val-sigma" class="text-emerald-400 font-bold">0.190</span>
+            </div>
+            <input id="slider-sigma" type="range" min="0.05" max="0.40" step="0.01" value="0.19" />
+            <div class="flex justify-between text-[10px] font-mono-code text-slate-500 mt-1">
+              <span>0.05 (20-day incubation)</span>
+              <span>0.40 (2.5-day incubation)</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Reproduction Number Readout -->
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+            <span class="text-xs uppercase font-mono-code text-slate-400">Basic Reproduction Number (R₀ = β / γ)</span>
+            <div id="sim-r0-val" class="text-3xl font-bold font-mono-code text-cyan-400 mt-1">1.52</div>
+            <p id="sim-r0-status" class="text-xs text-slate-400 mt-1">Epidemic spreads sustained expansion (R₀ &gt; 1)</p>
+          </div>
+
+        </div>
+
+        <!-- Simulation Graph Column (7 Cols) -->
+        <div class="lg:col-span-7 spotlight-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between reveal-on-scroll delay-200">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+              <span class="text-xs uppercase font-mono-code text-indigo-400 font-bold">Numerical SEIR Trajectory</span>
+              <span class="text-[11px] font-mono-code text-slate-400">120-Day Euler Integration</span>
+            </div>
+            <div class="relative w-full h-[360px]">
+              <canvas id="simulator-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-slate-800/80 grid grid-cols-4 gap-2 text-center text-xs font-mono-code">
+            <div>
+              <span class="text-slate-500 block">Peak Day</span>
+              <span id="sim-peak-day" class="font-bold text-slate-200">Day 42</span>
+            </div>
+            <div>
+              <span class="text-slate-500 block">Peak Infected</span>
+              <span id="sim-peak-infected" class="font-bold text-rose-400">22.4%</span>
+            </div>
+            <div>
+              <span class="text-slate-500 block">Total Recovered</span>
+              <span id="sim-final-recovered" class="font-bold text-emerald-400">68.2%</span>
+            </div>
+            <div>
+              <span class="text-slate-500 block">Final Susceptible</span>
+              <span id="sim-final-susceptible" class="font-bold text-cyan-400">31.8%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       8. ACADEMIC FOOTER & ONE-CLICK CITATION (BIBTEX)
+       ======================================================================== -->
+  <footer id="citation" class="py-24 relative bg-[#090A0F] border-t border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12 reveal-on-scroll">
+        <span class="text-xs uppercase tracking-widest font-mono-code text-cyan-400 font-bold">Citation &amp; Reproducibility</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-editorial font-bold text-slate-100 mt-2">
+          Cite This Investigation
+        </h2>
+        <p class="text-slate-400 text-sm mt-2">
+          If this multimodal research framework or datasets inform your work, please cite using the BibTeX entry below.
+        </p>
+      </div>
+
+      <!-- BibTeX Card with Spotlight and Animated Copy Button -->
+      <div class="relative rounded-2xl bg-slate-950 border border-slate-800 p-6 overflow-hidden shadow-2xl spotlight-card reveal-on-scroll">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500/70"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/70"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/70"></span>
+            <span class="text-xs font-mono-code text-slate-400 ml-2">reference.bib</span>
+          </div>
+
+          <button id="copy-bibtex-btn" class="btn-magnetic inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold font-mono-code bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-400 transition-all">
+            <svg class="icon-copy w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            <svg class="icon-check w-3.5 h-3.5 text-emerald-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="btn-copy-text">Copy BibTeX</span>
+          </button>
+        </div>
+
+        <pre id="bibtex-code" class="text-xs sm:text-sm font-mono-code text-slate-300 leading-relaxed overflow-x-auto p-2"><code>@article{multimodal_epidemic_forecasting_2026,
+  title     = {Multimodal COVID-19 Forecasting Integrating Hybrid Statistical, Physics Informed Neural Networks and Transformer Architectures},
+  author    = {Epidemiological Intelligence Lab and Deep Learning Systems Group},
+  journal   = {IEEE Transactions on Neural Networks and Learning Systems (Preprint)},
+  year      = {2026},
+  volume    = {14},
+  pages     = {1--18},
+  keywords  = {Epidemic Forecasting, Physics-Informed Neural Networks, PatchTST, Multimodal Time-Series, SEIR, Oxford Stringency, Google Mobility}
+}</code></pre>
+      </div>
+
+      <!-- Acknowledgments & Data Sources -->
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-slate-400 border-t border-slate-800/80 pt-8 reveal-on-scroll">
+        <div>
+          <h4 class="font-bold text-slate-200 uppercase font-mono-code mb-1">Open Datasets</h4>
+          <p>Johns Hopkins CSSE COVID-19 Data Repository, Google COVID-19 Community Mobility Reports, and Oxford Blavatnik School of Government (OxCGRT).</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-200 uppercase font-mono-code mb-1">Compute Infrastructure</h4>
+          <p>Trained using PyTorch, CUDA 12.1, Scikit-Learn, and XGBoost with automated hyperparameter grid tuning on distributed GPU clusters.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-200 uppercase font-mono-code mb-1">Full Document</h4>
+          <p class="mt-1">
+            <a href="assets/Multimodal_COVID19_Forecasting.pdf" download class="inline-flex items-center gap-1 text-cyan-400 hover:underline font-mono-code">
+              <span>Download Multimodal_COVID19_Forecasting.pdf</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="mt-12 text-center text-xs text-slate-500 font-mono-code">
+        &copy; 2026 Multimodal Epidemic Forecasting Consortium. Built for high-impact open academic research dissemination.
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ========================================================================
+       9. FULL-SCREEN INTERACTIVE PDF READER MODAL
+       ======================================================================== -->
+  <div id="pdf-reader-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-overlay">
+    <div class="relative max-w-6xl w-full h-[95vh] bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      
+      <!-- Modal Titlebar -->
+      <div class="flex items-center justify-between px-5 py-3 border-b border-slate-800 bg-slate-950/95">
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+          </div>
+          <div class="h-4 w-px bg-slate-800"></div>
+          <div>
+            <h3 class="text-xs sm:text-sm font-bold text-slate-100 font-serif-editorial">
+              Multimodal COVID-19 Forecasting (Complete 18-Page Manuscript)
+            </h3>
+            <span class="text-[10px] font-mono-code text-cyan-400">IEEE Preprint PDF Document</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Open in Separate Tab -->
+          <a href="assets/Multimodal_COVID19_Forecasting.pdf" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors">
+            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            <span class="hidden sm:inline">New Tab</span>
+          </a>
+
+          <!-- Download -->
+          <a href="assets/Multimodal_COVID19_Forecasting.pdf" download="Multimodal_COVID19_Forecasting.pdf" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span class="hidden sm:inline">Download</span>
+          </a>
+
+          <!-- Close -->
+          <button id="pdf-close-btn" class="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-colors ml-1" title="Close (Esc)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Embedded IFrame PDF Reader in Modal -->
+      <div class="flex-1 bg-slate-950 w-full h-full relative">
+        <iframe src="assets/Multimodal_COVID19_Forecasting.pdf#view=FitH&toolbar=1" 
+                class="w-full h-full border-none" 
+                title="Full Research Paper PDF">
+        </iframe>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       10. ADVANCED LIGHTBOX MODAL (WITH INTERACTIVE ZOOM & PAN)
+       ======================================================================== -->
+  <div id="diagram-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-overlay">
+    <div class="relative max-w-6xl w-full max-h-[94vh] bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="flex flex-wrap items-center justify-between px-5 py-3.5 border-b border-slate-800 bg-slate-950/90 gap-3">
+        <div>
+          <h3 id="modal-caption" class="text-sm font-bold font-serif-editorial text-slate-100">Architecture Diagram</h3>
+          <span class="text-[11px] font-mono-code text-cyan-400">Publication Grade (300 DPI Black &amp; White / Grayscale Plate)</span>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <!-- Zoom Controls -->
+          <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg p-1 text-xs font-mono-code">
+            <button id="modal-zoom-out" title="Zoom Out (-)" class="px-2 py-0.5 hover:text-cyan-400 text-slate-300 font-bold">−</button>
+            <span id="modal-zoom-val" class="px-2 text-slate-200">100%</span>
+            <button id="modal-zoom-in" title="Zoom In (+)" class="px-2 py-0.5 hover:text-cyan-400 text-slate-300 font-bold">+</button>
+            <button id="modal-zoom-reset" title="Reset Zoom (1:1)" class="px-2 py-0.5 border-l border-slate-700 text-slate-400 hover:text-white">Reset</button>
+          </div>
+
+          <!-- Download Button -->
+          <a id="modal-download" href="#" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 transition-colors">
+            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span class="hidden sm:inline">Download PNG</span>
+          </a>
+
+          <!-- Close Button -->
+          <button id="modal-close-btn" class="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-colors" title="Close (Esc)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Image Viewer Container (Supports Drag & Pan) -->
+      <div id="modal-viewer-container" class="flex-1 p-6 overflow-hidden flex items-center justify-center bg-white cursor-grab select-none relative min-h-[400px]">
+        <img id="modal-img" 
+             src="" 
+             alt="Full-Size Diagram" 
+             class="max-w-full max-h-[75vh] object-contain shadow-md rounded transition-transform duration-150 origin-center pointer-events-none" />
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       11. FLOATING COPY TOAST NOTIFICATION
+       ======================================================================== -->
+  <div id="copy-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-400 shadow-2xl backdrop-blur-md">
+      <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+      <span class="text-xs font-mono-code font-semibold">BibTeX citation copied to clipboard!</span>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       SCRIPTS
+       ======================================================================== -->
+  <script src="js/canvas-hero.js"></script>
+  <script src="js/pipeline-interactive.js"></script>
+  <script src="js/gallery-table.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

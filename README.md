@@ -5,6 +5,8 @@
 [![XGBoost](https://img.shields.io/badge/XGBoost-3.4+-eb5424.svg)](https://xgboost.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Paper: Research](https://img.shields.io/badge/Status-Research%20Paper-success.svg)](#citation)
+[![Web Showcase](https://img.shields.io/badge/Web_Showcase-Live_Portal-00d2ff.svg?logo=googlechrome&logoColor=white)](#-interactive-web-portal--research-showcase)
+[![Live Sandbox](https://img.shields.io/badge/Live_Sandbox-SEIR--PINN-818cf8.svg)](#-interactive-web-portal--research-showcase)
 
 > **Official Repository** for the research paper:  
 > **"Multimodal COVID-19 Forecasting: Integrating Hybrid Statistical, Physics-Informed Neural Networks and Transformer Architectures"**  
@@ -16,6 +18,9 @@
 
 - [Overview](#overview)
 - [Key Contributions](#key-contributions)
+- [Interactive Web Portal & Research Showcase](#interactive-web-portal--research-showcase)
+  - [Showcase Features](#showcase-features)
+  - [Launching the Web Application](#launching-the-web-application)
 - [Multimodal Data Streams](#multimodal-data-streams)
 - [Benchmarked Methodologies](#benchmarked-methodologies)
   - [Approach 1: Hybrid Auto-ARIMA + XGBoost](#approach-1-hybrid-auto-arima--xgboost-residual-correction)
@@ -80,6 +85,55 @@ This repository presents an exhaustive, end-to-end empirical benchmark of **four
 3. **Patch-based Self-Attention ($\text{PatchTST}$):** Evaluates subseries tokenization (7-day temporal patches) and channel-independent multi-head self-attention against classical epidemic baselines.
 4. **Tri-Modal Feature Alignment:** Blends confirmed/death/recovery trajectories with Google Community Mobility and Oxford Stringency Indices to capture human behavioral shifts and government interventions.
 5. **Rigorous Uncertainty Quantification:** Establishes Student's $t$-distribution prediction intervals across $80\%$, $90\%$, and $95\%$ confidence bounds for epidemiological operational planning.
+
+---
+
+<a id="interactive-web-portal--research-showcase"></a>
+## 🌐 Interactive Web Portal & Research Showcase
+
+An interactive, publication-grade web showcase and research dashboard is integrated in [`frontend/`](frontend/). Built with a dark-matter glassmorphic design system, dynamic particle mechanics hero canvas, real-time Chart.js trajectory visualizations, and an in-browser SEIR-PINN epidemiological simulation sandbox.
+
+<p align="center">
+  <img src="graphs/web_frontend_preview.png" alt="Multimodal Epidemic Forecasting Interactive Research Portal" width="100%"/>
+</p>
+
+<p align="center">
+  <em><b>Interactive Research Portal:</b> Featuring IEEE SOTA benchmark tables, an embedded paper PDF reader, interactive multimodal pipeline diagnostics, model architecture deep-dives, and real-time transmission simulation.</em>
+</p>
+
+<a id="showcase-features"></a>
+### ✨ Showcase Features
+
+| Module | Description & Capabilities |
+| :--- | :--- |
+| **📄 Embedded Paper PDF Reader** | Full manuscript reading environment with continuous pagination, zoom controls, and direct download (`990 KB`). |
+| **⚡ Live SEIR-PINN Sandbox** | Client-side epidemiological differential equation simulator with reactive sliders for transmission rate ($\beta$), incubation period ($\sigma$), recovery rate ($\gamma$), and lockdown stringency index. |
+| **📊 SOTA Benchmark Tables** | High-density comparative tables for Mortality, Confirmed, and Recovery targets with interactive column sorting and metric ranking. |
+| **🔬 Multimodal Pipeline Explorer** | Step-by-step visual dissection of data alignment across JHU CSSE curves, Google Mobility reports, and Oxford Stringency indices. |
+| **🏛️ Model Architecture Gallery** | Detailed schematics for Hybrid ARIMA-XGBoost, Hybrid Holt-Winters-RF, Neural-SEIR-PINN, and PatchTST with full-screen zoom and inspection. |
+| **📈 Dynamic Trajectory Plots** | Multi-horizon 76-day comparative predictions rendered with reactive Chart.js overlays and uncertainty bands. |
+| **🌓 Academic Dark/Light Mode** | Thoughtfully calibrated obsidian and light academic color themes with instant toggle. |
+| **📑 BibTeX Citation Generator** | One-click LaTeX/BibTeX citation block export with clipboard notification. |
+
+<a id="launching-the-web-application"></a>
+### 🚀 Launching the Web Application
+
+The frontend is completely zero-dependency and client-side (HTML5, Tailwind CSS, Chart.js, MathJax). You can launch it using any local web server:
+
+**Option 1: Using Python (Recommended)**
+```bash
+# From the repository root
+python -m http.server 8000 --directory frontend
+```
+Navigate to [http://localhost:8000](http://localhost:8000) in your web browser.
+
+**Option 2: Using Node.js (npx)**
+```bash
+npx serve frontend
+```
+
+**Option 3: Direct Browser Launch**
+Double-click or open [`frontend/index.html`](frontend/index.html) directly in any modern browser (Google Chrome, Mozilla Firefox, Microsoft Edge, Safari).
 
 ---
 
@@ -256,8 +310,21 @@ multimodal-epidemic-forecasting/
 ├── Approach 4 (PatchTST-Transformer)/        # Approach 4: Patch-based Temporal Transformer
 │   ├── patchtst_model.py                     # Subseries patching & self-attention network
 │   └── train_evaluate.py                     # Multi-horizon forecasting pipeline
+├── frontend/                                 # Interactive Web Portal & Research Showcase
+│   ├── index.html                            # Main research portal & embedded manuscript UI
+│   ├── css/
+│   │   └── styles.css                        # Dark-matter glassmorphism & typography
+│   ├── js/
+│   │   ├── canvas-hero.js                    # Dynamic particle & constellation physics hero
+│   │   ├── charts.js                         # Responsive Chart.js forecast trajectories
+│   │   ├── gallery-table.js                  # Benchmark metric sorting & diagram modal
+│   │   ├── pipeline-interactive.js           # Interactive multimodal pipeline explorer
+│   │   ├── simulator.js                      # Client-side SEIR-PINN ODE sandbox engine
+│   │   └── main.js                           # UI orchestration, progress & PDF reader
+│   └── assets/                               # Research paper manuscript PDF & high-res assets
 ├── dataset/                                  # Raw Data Sources
-├── graphs/                                   # High-Resolution Publication Figures (Figs 1-22)
+├── graphs/                                   # High-Resolution Publication Figures & Web Previews
+│   ├── web_frontend_preview.png              # Interactive Web Portal Showcase preview
 │   ├── paper_fig1_proposed_workflow.png      # End-to-end framework architecture
 │   ├── paper_fig18_predictions_grid.png      # 4-model comparative trajectory grid
 │   ├── paper_fig19_predictions_grid.png      # High-density comparative predictions
@@ -292,6 +359,13 @@ pip install torch torchvision torchaudio xgboost scikit-learn statsmodels pmdari
 
 <a id="running-the-models"></a><a id="-running-the-models"></a>
 ## 🚀 Running the Models
+
+### 0. Launch the Interactive Web Portal & Live Simulator
+```bash
+# Serve the interactive research showcase and SEIR-PINN sandbox
+python -m http.server 8000 --directory frontend
+# Open http://localhost:8000 in your browser
+```
 
 ### 1. Execute Approach 1: Hybrid ARIMA-XGBoost
 ```bash
@@ -374,6 +448,16 @@ All generated image artifacts will be populated in [`tables/`](tables/) and [`gr
 | :---: | :---: |
 | <img src="graphs/paper_fig20_prediction_intervals.png" width="100%"/> | <img src="graphs/paper_fig21_prediction_intervals_deaths.png" width="100%"/> |
 | **Figure 20:** ARIMA-XGBoost Confirmed Prediction Intervals | **Figure 21:** ARIMA-XGBoost Mortality Prediction Intervals |
+
+---
+
+### 4. Interactive Web Research Showcase & Sandbox UI
+<p align="center">
+  <img src="graphs/web_frontend_preview.png" alt="Figure 23: Interactive Web Research Showcase and Simulation Sandbox" width="95%"/>
+</p>
+<p align="center">
+  <b>Figure 23:</b> Interactive Web Research Showcase and Simulation Sandbox interface featuring real-time SEIR-PINN parameter perturbation, embedded PDF reader, and benchmark leaderboards.
+</p>
 
 ---
 
