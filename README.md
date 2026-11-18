@@ -7,6 +7,7 @@
 [![Paper: Research](https://img.shields.io/badge/Status-Research%20Paper-success.svg)](#citation)
 [![Web Showcase](https://img.shields.io/badge/Web_Showcase-Live_Portal-00d2ff.svg?logo=googlechrome&logoColor=white)](#-interactive-web-portal--research-showcase)
 [![Live Sandbox](https://img.shields.io/badge/Live_Sandbox-SEIR--PINN-818cf8.svg)](#-interactive-web-portal--research-showcase)
+[![Video Demo](https://img.shields.io/badge/Video-Demonstration-FF0000.svg?logo=youtube&logoColor=white)](#interactive-video-demonstration)
 
 > **Official Repository** for the research paper:  
 > **"Multimodal COVID-19 Forecasting: Integrating Hybrid Statistical, Physics-Informed Neural Networks and Transformer Architectures"**  
@@ -19,6 +20,7 @@
 - [Overview](#overview)
 - [Key Contributions](#key-contributions)
 - [Interactive Web Portal & Research Showcase](#interactive-web-portal--research-showcase)
+  - [Interactive Video Demonstration](#interactive-video-demonstration)
   - [Showcase Features](#showcase-features)
   - [Launching the Web Application](#launching-the-web-application)
 - [Multimodal Data Streams](#multimodal-data-streams)
@@ -100,6 +102,28 @@ An interactive, publication-grade web showcase and research dashboard is integra
 <p align="center">
   <em><b>Interactive Research Portal:</b> Featuring IEEE SOTA benchmark tables, an embedded paper PDF reader, interactive multimodal pipeline diagnostics, model architecture deep-dives, and real-time transmission simulation.</em>
 </p>
+
+---
+
+<a id="interactive-video-demonstration"></a>
+### 🎥 System Demonstration & Interactive Video Walkthrough
+
+Watch the complete demonstration of the multimodal epidemic forecasting system, interactive SEIR-PINN parameter simulation, and comparative benchmark visualizers in action:
+
+<p align="center">
+  <video src="graphs/Multimodal%20Epidemic%20Forecasting.mp4" width="100%" controls="controls" poster="graphs/web_frontend_preview.png">
+    Your browser does not support the video tag. You can <a href="graphs/Multimodal%20Epidemic%20Forecasting.mp4">download or view the MP4 video walkthrough directly</a>.
+  </video>
+</p>
+
+<p align="center">
+  <em><b>Video Walkthrough (01:56):</b> Demonstration of the research portal, interactive SEIR-PINN ODE sandbox, model comparison tables, and 76-day trajectory forecasts.</em>
+</p>
+
+> [!TIP]
+> **Direct Video Access:** If your markdown viewer cannot play inline videos, you can open or download [`graphs/Multimodal Epidemic Forecasting.mp4`](graphs/Multimodal%20Epidemic%20Forecasting.mp4) directly.
+
+---
 
 <a id="showcase-features"></a>
 ### ✨ Showcase Features
@@ -323,7 +347,8 @@ multimodal-epidemic-forecasting/
 │   │   └── main.js                           # UI orchestration, progress & PDF reader
 │   └── assets/                               # Research paper manuscript PDF & high-res assets
 ├── dataset/                                  # Raw Data Sources
-├── graphs/                                   # High-Resolution Publication Figures & Web Previews
+├── graphs/                                   # High-Resolution Publication Figures & Media
+│   ├── Multimodal Epidemic Forecasting.mp4   # System demonstration & web walkthrough video (01:56)
 │   ├── web_frontend_preview.png              # Interactive Web Portal Showcase preview
 │   ├── paper_fig1_proposed_workflow.png      # End-to-end framework architecture
 │   ├── paper_fig18_predictions_grid.png      # 4-model comparative trajectory grid
